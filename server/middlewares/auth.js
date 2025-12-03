@@ -19,9 +19,9 @@ export const authmiddleware = async (req,res,next)=>{
             req.free_usage=0;
 
             req.plan = hasPremiumPlan ? "premium" : "free";
-            next();
+            
         }
-
+next();
 
     } catch (error) {
         console.log("error in the middleware",error);

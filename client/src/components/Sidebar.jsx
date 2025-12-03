@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/clerk-react";
 import { useLocation, useNavigate } from "react-router-dom"; 
-import { FileText, Lightbulb, Image, Scissors, Eraser, FileCheck2, LayoutDashboard } from "lucide-react";
+import { FileText, Lightbulb, Image, Scissors, Eraser, FileCheck2, LayoutDashboard,Users  } from "lucide-react";
 
 export const Sidebar = () => {
   const { user } = useUser();
@@ -15,6 +15,7 @@ export const Sidebar = () => {
     { label: "Remove Background", icon: <Scissors size={20} />, to: "/ai/remove-bg" },
     { label: "Remove Object", icon: <Eraser size={20} />, to: "/ai/remove-object" },
     { label: "Review Resume", icon: <FileCheck2 size={20} />, to: "/ai/review-resume" },
+    { label: "Community", icon: <Users  size={20} />, to: "/ai/community" },
   ];
 
   return (
@@ -33,7 +34,7 @@ export const Sidebar = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 pb-10">
+      <div className="flex flex-col gap-3 ">
         {menu.map((item, index) => {
           const isActive = location.pathname === item.to;
 
@@ -57,7 +58,7 @@ export const Sidebar = () => {
       </div>
 
 
-      <div className="bottom-0 pt-8 text-center text-sm text-gray-500">
+      <div className="bottom-0 pt-3 text-center text-sm text-gray-500">
         <p>All rights reserved.</p>
         <p className="tracking-tight">
           AI can make mistakes. Validate before sensitive use.

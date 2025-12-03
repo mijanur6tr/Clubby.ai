@@ -1,5 +1,4 @@
-import React from "react";
-import {Link,  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useClerk,useUser,UserButton } from "@clerk/clerk-react";
 
 const Navbar = () => {

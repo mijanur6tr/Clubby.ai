@@ -1,24 +1,59 @@
 import React, { useState } from 'react';
 import { Sparkles, Image, Edit3, Loader2 } from 'lucide-react';
+import toast from "react-hot-toast"
+import axios from "axios";
+import { useAuth } from '@clerk/clerk-react';
+
+
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const GenerateImage = () => {
     const availableStyles = ['Realistic', 'Ghibli Style', 'Pixel Art', 'Watercolor', 'Cyberpunk', 'Abstract'];
 
     const [description, setDescription] = useState('');
-    const [style, setStyle] = useState(availableStyles[0]); 
-    const [publish, setPublish] = useState(false); 
+    const [style, setStyle] = useState(availableStyles[0]);
+    const [publish, setPublish] = useState(false);
     const [generatedImageUrl, setGeneratedImageUrl] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleGenerate = () => {
-       
-        console.log("UI Button Clicked. Description:", description, "Style:", style, "Publish:", publish); 
-        setIsLoading(true);
-        setGeneratedImageUrl(null);
-        setTimeout(() => {
-            setIsLoading(false);
-           
-        }, 2000);
+    const { getToken } = useAuth();
+
+    const handleGenerate = async () => {
+
+
+        setIsLoading(true)
+
+        try {
+
+            const prompt = `generate an image of ${description} regarding the ${style} style`
+
+            const { data } = await axios.post("/api/ai/generate-image", { prompt, publish }, {
+                headers: {
+                    Authorization: `Bearer ${await getToken()}`
+                }
+            })
+
+            if (data.success) {
+                setGeneratedImageUrl(data.secure_url);
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            console.log("Error in generating image", error)
+            toast.error(error.message)
+        } finally {
+            setIsLoading(false)
+        }
+
+
+        // console.log("UI Button Clicked. Description:", description, "Style:", style, "Publish:", publish); 
+        // setIsLoading(true);
+        // setGeneratedImageUrl(null);
+        // setTimeout(() => {
+        //     setIsLoading(false);
+
+        // }, 2000);
     };
 
     const ImageDisplay = () => {
@@ -34,11 +69,26 @@ const GenerateImage = () => {
 
         if (generatedImageUrl) {
             return (
-                <div className="flex items-center justify-center h-full">
-                    <img src={generatedImageUrl} alt="Generated" className="max-w-full max-h-full object-contain rounded-lg shadow-md" />
+                <div className="flex flex-col items-center justify-center h-full">
+                    <img
+                        src={generatedImageUrl}
+                        alt="Generated"
+                        className="max-w-full max-h-full object-contain rounded-lg shadow-md"
+                    />
+
+                    <a
+                        href={generatedImageUrl}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-lg font-medium shadow hover:bg-blue-700 transition"
+                    >
+                        Download Image
+                    </a>
                 </div>
             );
         }
+
 
         return (
             <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500 p-8 text-center">
@@ -54,17 +104,17 @@ const GenerateImage = () => {
     return (
         <div className="min-h-screen bg-gray-50 p-4 sm:p-6 font-sans">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
-                
-             
+
+
                 <div className="lg:col-span-2">
                     <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-gray-100">
-                        
+
                         <h1 className="flex items-center text-2xl font-bold text-gray-800 mb-8">
                             <Sparkles className="w-6 h-6 mr-2 text-green-500" />
                             AI Image Generator
                         </h1>
 
-                     
+
                         <div className="mb-6">
                             <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
                                 Describe Your Image
@@ -79,8 +129,8 @@ const GenerateImage = () => {
                             ></textarea>
                         </div>
 
-                      
-                        <div className="mb-6"> 
+
+                        <div className="mb-6">
                             <label className="block text-sm font-medium text-gray-700 mb-3">
                                 Style
                             </label>
@@ -89,11 +139,10 @@ const GenerateImage = () => {
                                     <button
                                         key={s}
                                         onClick={() => setStyle(s)}
-                                        className={`px-5 py-2 rounded-lg text-sm font-medium transition duration-200 ease-in-out border ${
-                                            style === s
+                                        className={`px-5 py-2 rounded-lg text-sm font-medium transition duration-200 ease-in-out border ${style === s
                                                 ? 'bg-blue-500 text-white border-blue-500 shadow-md'
                                                 : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                                        }`}
+                                            }`}
                                     >
                                         {s}
                                     </button>
@@ -101,7 +150,7 @@ const GenerateImage = () => {
                             </div>
                         </div>
 
-                   
+
                         <div className="mb-8 flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
                             <label htmlFor="publish-toggle" className="text-sm font-medium text-gray-700">
                                 Publish to Gallery
@@ -114,30 +163,27 @@ const GenerateImage = () => {
                                     id="publish-toggle"
                                     checked={publish}
                                     onChange={(e) => setPublish(e.target.checked)}
-                                    className={`toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition duration-300 ease-in-out ${
-                                        publish ? 'translate-x-full border-green-500' : 'border-gray-300'
-                                    }`}
-                                    style={{ left: publish ? '45%' : '0' }} 
+                                    className={`toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition duration-300 ease-in-out ${publish ? 'translate-x-full border-green-500' : 'border-gray-300'
+                                        }`}
+                                    style={{ left: publish ? '45%' : '0' }}
                                 />
-                                <label 
-                                    htmlFor="publish-toggle" 
-                                    className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition duration-200 ease-in ${
-                                        publish ? 'bg-green-500' : 'bg-gray-300'
-                                    }`}
+                                <label
+                                    htmlFor="publish-toggle"
+                                    className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition duration-200 ease-in ${publish ? 'bg-green-500' : 'bg-gray-300'
+                                        }`}
                                 ></label>
                             </div>
                         </div>
 
-                        
-                
+
+
                         <button
                             onClick={handleGenerate}
                             disabled={isLoading}
-                            className={`w-full flex items-center justify-center px-4 py-3 text-white font-semibold rounded-xl transition duration-300 transform active:scale-98 ${
-                                isLoading
+                            className={`w-full flex items-center justify-center px-4 py-3 text-white font-semibold rounded-xl transition duration-300 transform active:scale-98 ${isLoading
                                     ? 'bg-gray-400 cursor-not-allowed'
                                     : 'bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg shadow-green-500/50'
-                            }`}
+                                }`}
                         >
                             {isLoading ? (
                                 <>
@@ -164,7 +210,7 @@ const GenerateImage = () => {
                     </div>
                 </div>
             </div>
-           
+
             <style jsx="true">{`
                 .toggle-checkbox {
                     top: 0;
