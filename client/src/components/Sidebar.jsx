@@ -9,6 +9,7 @@ export const Sidebar = ({ closeSidebar }) => {
   const { user } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
+  
 
   const menu = [
     { label: "Dashboard", icon: <LayoutDashboard size={20} />, to: "/ai/dashboard" },
@@ -25,7 +26,7 @@ export const Sidebar = ({ closeSidebar }) => {
     <div className="relative w-[250px] min-h-[90vh] bg-white border-r border-gray-200 p-6 flex flex-col">
 
       {/* Close Button for Mobile */}
-      {closeSidebar && (
+      {closeSidebar && user && (
         <button
           onClick={closeSidebar}
           className="absolute top-1  right-4 bg-gray-200 px-1 rounded-full lg:hidden"
