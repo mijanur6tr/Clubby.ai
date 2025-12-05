@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <section className="w-full min-h-[50vh] lg:min-h-[80vh] flex items-center justify-center relative 
-                        bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                        bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
       
       {/* Overlay for text visibility */}
       <div className="absolute inset-0 bg-black/25"></div>

@@ -3,7 +3,7 @@ import { PricingTable } from "@clerk/clerk-react";
 
 const Plan = () => {
   return (
-    <section className="w-full pt-20 px-6 bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    <section className="w-full pt-20 px-6 bg-linear-to-b from-blue-50 via-white to-blue-50">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">

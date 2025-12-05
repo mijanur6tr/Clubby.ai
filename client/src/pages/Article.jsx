@@ -39,7 +39,7 @@ const Article = () => {
 
         e.preventDefault();
         setLoading(true);
-         console.log(topic,length,platform)
+        
         try {
 
             const prompt = `Write an article on ${topic} within the max token length of ${length}`
