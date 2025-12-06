@@ -3,7 +3,7 @@ import sql from "../config/db.js";
 import { clerkClient } from "@clerk/express";
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
-// import { PDFParse } from "pdf-parse";
+import { PDFParse } from "pdf-parse";
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -387,88 +387,90 @@ export const removeObject = async (req, res) => {
 };
 
 //review resume
-// export const reviewResume = async (req, res) => {
-//   try {
-//     const { userId } = await req.auth();
-//     const resume = req.file;
-//     const plan = req.plan;
+export const reviewResume = async (req, res) => {
+  try {
+    const { userId } = await req.auth();
+    const resume = req.file;
+    const plan = req.plan;
 
-//     if (plan !== "premium") {
-//       return res.status(403).json({
-//         success: false,
-//         message:
-//           "You are in the free plan. Upgrade your plan to use this feature.",
-//       });
-//     }
+    if (plan !== "premium") {
+      return res.status(403).json({
+        success: false,
+        message:
+          "You are in the free plan. Upgrade your plan to use this feature.",
+      });
+    }
 
-//     if (!resume) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "No resume file uploaded.",
-//       });
-//     }
+    if (!resume) {
+      return res.status(400).json({
+        success: false,
+        message: "No resume file uploaded.",
+      });
+    }
 
-//     const MAX_SIZE = 2 * 1024 * 1024;
-//     if (resume.size > MAX_SIZE) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Resume file size exceeds 2 MB limit.",
-//       });
-//     }
+    const MAX_SIZE = 2 * 1024 * 1024;
+    if (resume.size > MAX_SIZE) {
+      return res.status(400).json({
+        success: false,
+        message: "Resume file size exceeds 2 MB limit.",
+      });
+    }
 
-//     const parser = new PDFParse({ url: resume.path });
+    const parser = new PDFParse({ url: resume.path });
 
-//     const resumeData = await parser.getText();
-//     const resumeText = resumeData.text;
+    const resumeData = await parser.getText();
+    const resumeText = resumeData.text;
 
-//     const prompt = `You are an expert resume reviewer.
-//                     Analyze the following resume and provide:
+    const prompt = `You are an expert resume reviewer.
+                    Analyze the following resume and provide:
 
                     
 
-//                     1. A rating (out of 10) for structure, clarity, and ATS friendliness
-//                     2. Specific improvements in each section
-//                     3. Rewrite the experience section using strong action verbs
-//                     4. Provide a cleaner modern layout suggestion
-//                     5. Identify technologies and give skill-level estimation
+                    1. A rating (out of 10) for structure, clarity, and ATS friendliness
+                    2. Specific improvements in each section
+                    3. Rewrite the experience section using strong action verbs
+                    4. Provide a cleaner modern layout suggestion
+                    5. Identify technologies and give skill-level estimation
 
-//                     Here is the extracted resume text:${resumeText}`;
+                    Here is the extracted resume text:${resumeText}`;
 
-//     const response = await AI.chat.completions.create({
-//       model: "gemini-2.0-flash",
-//       messages: [
-//         {
-//           role: "user",
-//           content: prompt,
-//         },
-//       ],
-//       temperature: 0.7,
-//       max_completion_tokens: 1600,
-//     });
+    const response = await AI.chat.completions.create({
+      model: "gemini-2.0-flash",
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+      max_completion_tokens: 1600,
+    });
 
-//     const content = response.choices?.[0]?.message?.content;
+    const content = response.choices?.[0]?.message?.content;
 
-//     if (!content) {
-//       console.error("AI failed to return review content for prompt:", prompt);
-//       return res.status(502).json({
-//         success: false,
-//         message: "Review generation failed. The AI returned an empty response.",
-//       });
-//     }
+    if (!content) {
+      console.error("AI failed to return review content for prompt:", prompt);
+      return res.status(502).json({
+        success: false,
+        message: "Review generation failed. The AI returned an empty response.",
+      });
+    }
 
-//     await sql`
-//       INSERT INTO creations(user_id, prompt, content, type) 
-//       VALUES(${userId}, 'review resume', ${content}, 'resume-review')
-//     `;
+    await sql`
+      INSERT INTO creations(user_id, prompt, content, type) 
+      VALUES(${userId}, 'review resume', ${content}, 'resume-review')
+    `;
 
-//     res.status(200).json({ success: true, content });
-//   } catch (error) {
-//     console.error("Error in generating article:", error);
+    res.status(200).json({ success: true, content });
+  } catch (error) {
+    console.error("Error in generating article:", error);
 
-//     res.status(500).json({
-//       success: false,
-//       message: "An unexpected server error occurred during content generation.",
-//       error: error.message,
-//     });
-//   }
-// };
+    res.status(500).json({
+      success: false,
+      message: "An unexpected server error occurred during content generation.",
+      error: error.message,
+    });
+  }
+};
+
+

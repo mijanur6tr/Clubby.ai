@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios"
 import { useAuth, useUser } from '@clerk/clerk-react';
 import toast from "react-hot-toast"
-import { Loader2 } from 'lucide-react';
+
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 

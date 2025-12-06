@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
 import Navbar from "../components/Navbar.jsx";
 import { useUser, useClerk } from "@clerk/clerk-react";
-import { Menu } from "lucide-react"; // <-- install if needed: npm i lucide-react
-import Footer from "../components/Footer.jsx";
+import { Menu } from "lucide-react"; 
+
 
 const Layout = () => {
   const { user, isLoaded } = useUser();
@@ -44,10 +44,10 @@ const Layout = () => {
 
        
         <button
-          className="lg:hidden absolute top-4 left-4 p-2 rounded-md bg-gray-200 shadow-md"
+          className="lg:hidden absolute top-3 left-2 sm:left-5 p-2 rounded-md bg-gray-200 shadow-md"
           onClick={() => setIsSidebarOpen(true)}
         >
-          <Menu size={24} />
+          <Menu size={19} />
         </button>
       </div>
 

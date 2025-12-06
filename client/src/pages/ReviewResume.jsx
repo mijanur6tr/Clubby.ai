@@ -47,44 +47,47 @@ const ReviewResume = () => {
         // }
     };
 
-    const AnalysisResultsDisplay = () => {
-        if (isLoading) {
-            return (
-                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500">
-                    <Loader2 className="w-8 h-8 animate-spin text-teal-500 mb-4" />
-                    <p className="text-lg font-medium">Analyzing resume...</p>
-                    <p className="text-sm">This may take a few moments.</p>
-                </div>
-            );
-        }
+    // const AnalysisResultsDisplay = () => {
+    //     if (isLoading) {
+    //         return (
+    //             <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500">
+    //                 <Loader2 className="w-8 h-8 animate-spin text-teal-500 mb-4" />
+    //                 <p className="text-lg font-medium">Analyzing resume...</p>
+    //                 <p className="text-sm">This may take a few moments.</p>
+    //             </div>
+    //         );
+    //     }
 
-        if (content) {
-            return(
-                 <div className='h-[60vh] overflow-y-auto pr-4'>
-                <div className='reset-tw'>
-                    <Markdown>
-                        {content}
-                    </Markdown>
-                </div>
+    //     if (content) {
+    //         return(
+    //              <div className='h-[60vh] overflow-y-auto pr-4'>
+    //             <div className='reset-tw'>
+    //                 <Markdown>
+    //                     {content}
+    //                 </Markdown>
+    //             </div>
 
-            </div>
-            )
+    //         </div>
+    //         )
            
-        }
+    //     }
 
-        return (
-            <div className="flex flex-col items-center justify-center h-full min-h-[70vh] text-gray-500 p-8 text-center">
-                <FileText className="w-12 h-12 text-gray-300 mb-4" />
-                <p className="text-lg">
-                    Upload your resume and click "Review Resume" to get started
-                </p>
-            </div>
-        );
-    };
+    //     return (
+    //         <div className="flex flex-col items-center justify-center h-full min-h-[70vh] text-gray-500 p-8 text-center">
+    //             <FileText className="w-12 h-12 text-gray-300 mb-4" />
+    //             <p className="text-lg">
+    //                 Upload your resume and click "Review Resume" to get started
+    //             </p>
+    //         </div>
+    //     );
+    // };
 
     return (
-        <div className="min-h-[50vh] bg-gray-50 p-4 sm:p-8 font-sans">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div className="min-h-[50vh] bg-gray-50 p-4 sm:p-8 font-sans flex justify-center items-center ">
+            <p className='max-w-2xl text-2xl'>Soon this feature will be unlocked. Try Generate content ideas, Generate Content,  Make images, Remove backgrounds,
+          Belete objects form image.</p>
+          
+            {/* <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
 
                 <div className="lg:col-span-2">
                     <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-gray-100">
@@ -164,7 +167,7 @@ const ReviewResume = () => {
                         <AnalysisResultsDisplay />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

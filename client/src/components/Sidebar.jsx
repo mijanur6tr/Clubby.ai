@@ -29,7 +29,7 @@ export const Sidebar = ({ closeSidebar }) => {
       {closeSidebar && user && (
         <button
           onClick={closeSidebar}
-          className="absolute top-1  right-4 bg-gray-200 px-1 rounded-full lg:hidden"
+          className="absolute top-3  right-4 bg-gray-200 px-2 py-2 rounded-full lg:hidden"
         >
           <X size={17} />
         </button>

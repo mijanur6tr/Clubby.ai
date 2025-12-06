@@ -3,19 +3,17 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="w-full min-h-[50vh] lg:min-h-[80vh] flex items-center justify-center relative 
-                        bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <section className="w-full min-h-[50vh] lg:min-h-[80vh] flex items-center justify-center relative bg-linear-to-r from-[#A96CCE] to-[#3DC3BF]">
       
-      {/* Overlay for text visibility */}
       <div className="absolute inset-0 bg-black/25"></div>
 
       <div className="relative max-w-4xl mx-auto px-6 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold drop-shadow-lg">
           Your All-in-One AI Assistant
         </h1>
-        <p className="mt-4 text-lg md:text-xl drop-shadow-md">
-          Create articles, generate ideas, make images, remove backgrounds,
-          delete objects, and review resumes — everything in one platform.
+        <p className="mt-4 max-w-2xl text-lg md:text-xl drop-shadow-md">
+          Generate content ideas, Generate Content,  Make images, Remove backgrounds,
+          Belete objects form image ~ everything in one platform.
         </p>
 
         <div className="mt-8 flex justify-center gap-4">
