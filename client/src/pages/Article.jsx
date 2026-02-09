@@ -20,9 +20,9 @@ const Article = () => {
 
 
     const wordCountMap = {
-        'short': { label: 'Short', maxLength: 400 },
-        'medium': { label: 'Medium', maxLength: 800 },
-        'long': { label: 'Long', maxLength: 1200 },
+        'short': { label: 'Short', maxLength: 1200 },
+        'medium': { label: 'Medium', maxLength: 1800 },
+        'long': { label: 'Long', maxLength: 2500 },
     };
 
     const typeObj = {
@@ -35,7 +35,7 @@ const Article = () => {
 
 
 
-    const handleGenerate = async (e) => {
+    const handleGenerating = async (e) => {
 
         e.preventDefault();
         setLoading(true);
@@ -67,8 +67,8 @@ const Article = () => {
     const ArticleDisplay = () => {
         if (loading) {
             return (
-                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500">
-                    <Loader2 className="w-8 h-8 animate-spin text-purple-500 mb-4" />
+                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-slate-300">
+                    <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mb-4" />
                     <p className="text-lg font-medium">Generating {platform}...</p>
                     <p className="text-sm">This may take a few moments.</p>
                 </div>
@@ -78,7 +78,7 @@ const Article = () => {
             <div>
                 {content ? (
                     <div className='h-[60vh] overflow-y-auto pr-4'>
-                        <div className='reset-tw'>
+                        <div className='reset-tw prose prose-invert max-w-none'>
                             <Markdown>
                                 {content}
                             </Markdown>
@@ -86,10 +86,10 @@ const Article = () => {
 
                     </div>
                 ) :
-                    (<div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500 p-8 text-center">
-                        <Edit3 className="w-12 h-12 text-gray-300 mb-4" />
+                    (<div className="flex flex-col items-center justify-center h-full min-h-[300px] text-slate-400 p-8 text-center">
+                        <Edit3 className="w-12 h-12 text-slate-600 mb-4" />
                         <p className="text-lg">
-                            Enter a topic and click <span className="font-semibold">"Generate Content"</span> to get started.
+                            Enter a topic and click <span className="font-semibold text-cyan-400">"Generate Content"</span> to get started.
                         </p>
                     </div>)}
             </div>
@@ -99,19 +99,19 @@ const Article = () => {
 
 
     return (
-       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
+       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 p-4">
 
     {/* LEFT SECTION — form */}
     <div className="lg:col-span-2 ">
-        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-gray-100">
+        <div className="bg-slate-800/50 p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-slate-700 backdrop-blur-sm">
 
-            <h1 className="flex items-center text-2xl font-bold text-gray-800 mb-3 lg:mb-8">
-                <Sparkles className="w-6 h-6 mr-2 text-blue-500" />
+            <h1 className="flex items-center text-2xl font-bold text-white mb-3 lg:mb-8">
+                <Sparkles className="w-6 h-6 mr-2 text-cyan-400" />
                 AI Content Writer
             </h1>
 
            <div className=" mb-3 lg:mb-8">
-    <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-2">
+    <label htmlFor="topic" className="block text-sm font-medium text-slate-300 mb-2">
         Content Topic
     </label>
 
@@ -125,12 +125,12 @@ const Article = () => {
         }}
         placeholder="The future of artificial intelligence"
         rows={3}
-        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 transition duration-150 shadow-sm resize-none overflow-hidden"
+        className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:ring-cyan-500 focus:border-cyan-500 transition duration-150 shadow-sm resize-none overflow-hidden text-white placeholder-slate-500"
     />
 </div>
 
        <div className="mb-3 lg:mb-10">
-    <label className="block text-sm font-medium text-gray-700 mb-3">
+    <label className="block text-sm font-medium text-slate-300 mb-3">
         Content Type
     </label>
 
@@ -143,8 +143,8 @@ const Article = () => {
                 className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all duration-200 
                     ${
                         platform === value.value
-                            ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-transparent shadow-md"
+                            : "bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700"
                     }
                 `}
             >
@@ -156,7 +156,7 @@ const Article = () => {
 
 
             <div className="mb-3 lg:mb-10">
-                <label className="block text-sm font-medium  mb-3">
+                <label className="block text-sm font-medium  text-slate-300 mb-3">
                     Content Length
                 </label>
                 <div className="flex flex-wrap gap-2 p-1  rounded-xl">
@@ -167,8 +167,8 @@ const Article = () => {
                             className={`px-4 py-2  rounded-xl text-sm font-medium border transition-all duration-200 
                     ${
                         length=== value.maxLength
-                            ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-transparent shadow-md"
+                            : "bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700"
                     }
                 `}
                         >
@@ -179,10 +179,10 @@ const Article = () => {
             </div>
 
             <button
-                onClick={handleGenerate}
+                onClick={handleGenerating}
                 disabled={loading}
                 className="w-full flex items-center justify-center px-4 py-3 text-white font-semibold rounded-xl transition duration-300 transform active:scale-98
-                bg-linear-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 shadow-lg shadow-cyan-500/50"
+                bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 shadow-lg shadow-purple-500/50"
             >
                 {loading ? <Loader className="w-5 h-5 mr-2" /> : <FileText className="w-5 h-5 mr-2" />}
                 Generate Content
@@ -193,9 +193,9 @@ const Article = () => {
 
     {/* RIGHT SECTION — preview */}
     <div className="lg:col-span-3 ">
-        <div className="bg-white p-6 sm:p-10 rounded-2xl shadow-xl min-h-[50vh] lg:min-h-[70vh] border border-gray-100">
-            <h2 className="flex items-center text-xl font-bold text-gray-800 border-b pb-4 mb-6">
-                <FileText className="w-5 h-5 mr-2 text-indigo-500" />
+        <div className="bg-slate-800/50 p-6 sm:p-10 rounded-2xl shadow-xl min-h-[50vh] lg:min-h-[70vh] border border-slate-700 backdrop-blur-sm">
+            <h2 className="flex items-center text-xl font-bold text-white border-b border-slate-700 pb-4 mb-6">
+                <FileText className="w-5 h-5 mr-2 text-cyan-400" />
                 Generated Content
             </h2>
 

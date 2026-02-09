@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
-import Navbar from "../components/Navbar.jsx";
-import { useUser, useClerk } from "@clerk/clerk-react";
+import Footer from "../components/Footer";
+import { useUser } from "@clerk/clerk-react";
 import { Menu } from "lucide-react"; 
-
+import { SignIn } from "@clerk/clerk-react";
+ 
 
 const Layout = () => {
   const { user, isLoaded } = useUser();
-  const { openSignIn } = useClerk();
+
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   if (!isLoaded) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-lg font-medium">
+      <div className="flex items-center justify-center min-h-screen text-lg font-medium text-white">
         Loading...
       </div>
     );
@@ -22,61 +23,55 @@ const Layout = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-        <h2 className="text-3xl font-bold text-gray-800">Welcome to Clubby AI</h2>
-        <p className="text-gray-600 mt-2">Please sign in to continue.</p>
-
-        <button
-          onClick={openSignIn}
-          className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
-        >
-          Sign In
-        </button>
-      </div>
+    <>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-900">
+        <SignIn/>
+      </div>  
+       <Footer/>   
+       </>
     );
   }
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="flex h-[91vh] overflow-hidden bg-slate-950">
     
-      <div className="relative">
-        <Navbar />
+      {/* Sidebar - Desktop */}
+      <div className="hidden lg:flex flex-shrink-0">
+        <Sidebar />
+      </div>
 
-       
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
+      {/* Mobile Sidebar */}
+      <div
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 shadow-2xl transform transition-transform duration-300 lg:hidden 
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
+      </div>
+
+      {/* Vertical Bar with Hamburger */}
+      <div className="w-9 h-full flex flex-col items-center justify-center bg-slate-900/50 border-r border-slate-800 lg:hidden">
         <button
-          className="lg:hidden absolute top-3 left-2 sm:left-5 p-2 rounded-md bg-gray-200 shadow-md"
+          className="p-2 rounded-lg bg-slate-800 text-white shadow-md border border-slate-700 hover:bg-slate-700 transition"
           onClick={() => setIsSidebarOpen(true)}
         >
-          <Menu size={19} />
+          <Menu size={20} />
         </button>
       </div>
 
-      <div className="flex flex-1 overflow-hidden relative">
-
-        <div className="hidden lg:block">
-          <Sidebar />
-        </div>
-
-
-        {isSidebarOpen && (
-          <div
-            className="fixed inset-0   z-40 lg:hidden"
-            onClick={() => setIsSidebarOpen(false)}
-          ></div>
-        )}
-
-    
-        <div
-          className={`fixed z-50 top-0 left-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 lg:hidden 
-            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
-        >
-          <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
-        </div>
-
-
-        <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
+      {/* Main Content */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Page Content */}
+        <main className="flex-1 overflow-y-auto  sm:px-6 lg:px-8">
           <Outlet />
-        </div>
+        </main>
         
       </div>
     </div>

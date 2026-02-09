@@ -15,6 +15,8 @@ import RemoveBackground from "./pages/RemoveBackground.jsx";
 import RemoveObject from "./pages/RemoveObject.jsx";
 import ReviewResume from "./pages/ReviewResume.jsx";
 import Subscription from "./pages/Subscription.jsx";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
 
@@ -28,6 +30,7 @@ function App() {
   return (
     <>
     <Toaster/>
+    <Navbar/>
       <Routes>
 
         {/* Public route */}

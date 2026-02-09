@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   return (
     <div className="relative">
-      <p className='px-4 py-2 text-2xl font-bold mb-6 border border-r-cyan-300 border-l-amber-300 border-t-blue-300 border-b-amber-300 rounded-sm border-gray inline'>
+      <p className='px-4 py-2 mt-2 text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg shadow-lg inline-block'>
         Creations: {loading ? "..."  : creations.length}
       </p>
 

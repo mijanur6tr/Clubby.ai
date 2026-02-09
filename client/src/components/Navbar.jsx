@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useClerk, useUser,  UserButton } from "@clerk/clerk-react";
+import { NavLink, useNavigate } from "react-router-dom";
+import {  useUser,  UserButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
 import navLogo from '/navLogo.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { openSignIn } = useClerk();
   const { user } = useUser();
   // const { session } = useSession();  
 
@@ -28,28 +28,33 @@ const Navbar = () => {
   
 
   return (
-    <nav className="w-full top-0 left-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
-      <div className="mx-auto px-8 py-3 flex items-center justify-between">
+    <nav className="w-full  bg-[#ffffff00]">
+      <div className="mx-auto px-2 lg:px-8 py-3  flex items-center justify-between">
 
         <div
           className={`${user ? 'mx-2 sm:mx-6' : 'mx-0'} lg:mx-0 flex items-center justify-center`}
           onClick={() => navigate("/")}
         >
           <img src={navLogo} className="w-15" alt="Clubby AI Logo" />
-          <p className="text-2xl">Clubby Ai</p>
+          <p className="text-2xl font-serif">Clubby Ai</p>
         </div>
 
         {user ? (
           <UserButton />
         ) : (
-          <button
-            onClick={openSignIn}
-            className="lg:px-6 px-3 py-2 text-white font-semibold border-none rounded-lg shadow-md transition
-                     bg-linear-to-r from-cyan-500 to-purple-600
+         <NavLink to={"/ai/article"}>
+              <button
+           
+            className="lg:px-6 px-3 py-1.5 text-white font-semibold font-serif border-none rounded-lg shadow-md transition
+                     bg-linear-to-r from-cyan-400 to-purple-600
                      hover:to-purple-500 hover:from-cyan-400"
           >
             Sign In
           </button>
+         </NavLink>
+     
+       
+         
         )}
       </div>
     </nav>

@@ -21,7 +21,7 @@ const GenerateImage = () => {
     const { getToken } = useAuth();
     const { has } = useAuth();
 
-    const handleGenerate = async () => {
+    const handleGenerating = async () => {
 
 const canUseGenerateImage = has({ feature: "image_generation" }); 
 if (!canUseGenerateImage) {
@@ -66,8 +66,8 @@ if (!canUseGenerateImage) {
     const ImageDisplay = () => {
         if (isLoading) {
             return (
-                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500">
-                    <Loader2 className="w-8 h-8 animate-spin text-purple-500 mb-4" />
+                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-slate-300">
+                    <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mb-4" />
                     <p className="text-lg font-medium">Generating image...</p>
                     <p className="text-sm">This may take a few moments.</p>
                 </div>
@@ -88,7 +88,7 @@ if (!canUseGenerateImage) {
                         download
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-lg font-medium shadow hover:bg-blue-700 transition"
+                        className="mt-4 px-5 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-medium shadow hover:from-cyan-600 hover:to-purple-600 transition"
                     >
                         Download Image
                     </a>
@@ -98,10 +98,10 @@ if (!canUseGenerateImage) {
 
 
         return (
-            <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500 p-8 text-center">
-                <Image className="w-12 h-12 text-gray-300 mb-4" />
+            <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-slate-400 p-8 text-center">
+                <Image className="w-12 h-12 text-slate-600 mb-4" />
                 <p className="text-lg">
-                    Describe an image and click <span className="font-semibold">"Generate image"</span> to get started
+                    Describe an image and click <span className="font-semibold text-cyan-400">"Generate image"</span> to get started
                 </p>
             </div>
         );
@@ -109,21 +109,21 @@ if (!canUseGenerateImage) {
 
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 sm:p-6 font-sans">
+        <div className="min-h-screen p-4 sm:p-6 font-sans">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
 
 
                 <div className="lg:col-span-2">
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-gray-100">
+                    <div className="bg-slate-800/50 p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-slate-700 backdrop-blur-sm">
 
-                        <h1 className="flex items-center text-2xl font-bold text-gray-800 mb-2 lg:mb-8">
-                            <Sparkles className="w-6 h-6 mr-2 text-purple-500" />
+                        <h1 className="flex items-center text-2xl font-bold text-white mb-2 lg:mb-8">
+                            <Sparkles className="w-6 h-6 mr-2 text-cyan-400" />
                             AI Image Generator
                         </h1>
 
 
                         <div className="mb-2 lg:mb-6">
-                            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+                            <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-2">
                                 Describe Your Image
                             </label>
                             <textarea
@@ -132,13 +132,13 @@ if (!canUseGenerateImage) {
                                 onChange={(e) => setDescription(e.target.value)}
                                 placeholder="Describe what you want to see in the image..."
                                 rows="5"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-green-500 focus:border-green-500 transition duration-150 shadow-sm resize-none"
+                                className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:ring-cyan-500 focus:border-cyan-500 transition duration-150 shadow-sm resize-none text-white placeholder-slate-500"
                             ></textarea>
                         </div>
 
 
                         <div className="mb-2 lg:mb-6">
-                            <label className="block text-sm font-medium text-gray-700 mb-3">
+                            <label className="block text-sm font-medium text-slate-300 mb-3">
                                 Style
                             </label>
                             <div className="flex flex-wrap gap-3">
@@ -147,8 +147,8 @@ if (!canUseGenerateImage) {
                                         key={s}
                                         onClick={() => setStyle(s)}
                                         className={`px-5 py-2 rounded-lg text-sm font-medium transition duration-200 ease-in-out border ${style === s
-                                                ? 'bg-blue-500 text-white border-blue-500 shadow-md'
-                                                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                                                ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-transparent shadow-md'
+                                                : 'bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700'
                                             }`}
                                     >
                                         {s}
@@ -158,10 +158,10 @@ if (!canUseGenerateImage) {
                         </div>
 
 
-                        <div className="mb-2 lg:mb-8 flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
-                            <label htmlFor="publish-toggle" className="text-sm font-medium text-gray-700">
+                        <div className="mb-2 lg:mb-8 flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-600">
+                            <label htmlFor="publish-toggle" className="text-sm font-medium text-slate-300">
                                 Publish to Gallery
-                                <p className="text-xs text-gray-500 mt-0.5">Allow others to see your generated image.</p>
+                                <p className="text-xs text-slate-500 mt-0.5">Allow others to see your generated image.</p>
                             </label>
                             <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                                 <input
@@ -170,13 +170,13 @@ if (!canUseGenerateImage) {
                                     id="publish-toggle"
                                     checked={publish}
                                     onChange={(e) => setPublish(e.target.checked)}
-                                    className={`toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition duration-300 ease-in-out ${publish ? 'translate-x-full border-green-500' : 'border-gray-300'
+                                    className={`toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition duration-300 ease-in-out ${publish ? 'translate-x-full border-cyan-500' : 'border-slate-400'
                                         }`}
                                     style={{ left: publish ? '45%' : '0' }}
                                 />
                                 <label
                                     htmlFor="publish-toggle"
-                                    className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition duration-200 ease-in ${publish ? 'bg-green-500' : 'bg-gray-300'
+                                    className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition duration-200 ease-in ${publish ? 'bg-gradient-to-r from-cyan-500 to-purple-500' : 'bg-slate-600'
                                         }`}
                                 ></label>
                             </div>
@@ -184,12 +184,13 @@ if (!canUseGenerateImage) {
 
 
 
+
                         <button
-                            onClick={handleGenerate}
+                            onClick={handleGenerating}
                             disabled={isLoading}
                             className={`w-full flex items-center justify-center px-4 py-3 text-white font-semibold rounded-xl transition duration-300 transform active:scale-98 ${isLoading
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-linear-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 shadow-lg shadow-cyan-500/50'
+                                    ? 'bg-slate-700 cursor-not-allowed'
+                                    : 'bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 shadow-lg shadow-purple-500/25'
                                 }`}
                         >
                             {isLoading ? (
@@ -208,9 +209,9 @@ if (!canUseGenerateImage) {
                 </div>
 
                 <div className="lg:col-span-3">
-                    <div className="bg-white p-6 sm:p-10 rounded-2xl shadow-xl min-h-[50vh] lg:min-h-[70vh] border border-gray-100">
-                        <h2 className="flex items-center text-xl font-bold text-gray-800 border-b pb-4 mb-6">
-                            <Image className="w-5 h-5 mr-2 text-purple-500" />
+                    <div className="bg-slate-800/50 p-6 sm:p-10 rounded-2xl shadow-xl min-h-[50vh] lg:min-h-[70vh] border border-slate-700 backdrop-blur-sm">
+                        <h2 className="flex items-center text-xl font-bold text-white border-b border-slate-700 pb-4 mb-6">
+                            <Image className="w-5 h-5 mr-2 text-cyan-400" />
                             Generated image
                         </h2>
                         <ImageDisplay />
@@ -232,10 +233,10 @@ if (!canUseGenerateImage) {
                     left: 50%;
                 }
                 .toggle-checkbox + .toggle-label {
-                    background-color: #d1d5db; /* gray-300 */
+                    background-color: #475569; /* slate-600 */
                 }
                 .toggle-checkbox:checked + .toggle-label {
-                    background-color: #10b981; /* green-500 */
+                    background: linear-gradient(to right, #06b6d4, #a855f7); /* cyan-500 to purple-500 */
                 }
                 /* Hide the default checkbox */
                 .toggle-checkbox {

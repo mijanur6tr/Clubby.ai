@@ -24,7 +24,7 @@ const GenerateIdea = () => {
     ];
 
 
-    const handleGenerate = async (e) => {
+    const handleGenerating = async (e) => {
         e.preventDefault();
         setLoading(true)
 
@@ -53,8 +53,8 @@ const GenerateIdea = () => {
     const TitleDisplay = () => {
               if (loading) {
             return (
-                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500">
-                    <Loader2 className="w-8 h-8 animate-spin text-green-500 mb-4" />
+                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-slate-300">
+                    <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mb-4" />
                     <p className="text-lg font-medium">Generating Ideas...</p>
                     <p className="text-sm">This may take a few moments.</p>
                 </div>
@@ -65,7 +65,7 @@ const GenerateIdea = () => {
 
                 {content ? (
                     <div className='h-[60vh] overflow-y-auto pr-4'>
-                        <div className='reset-tw'>
+                        <div className='reset-tw prose prose-invert max-w-none'>
                             <Markdown>
                                 {content}
                             </Markdown>
@@ -73,10 +73,10 @@ const GenerateIdea = () => {
 
                     </div>
                 ) : (
-                    <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-gray-500 p-8 text-center">
-                        <Hash className="w-12 h-12 text-gray-300 mb-4 font-bold" />
+                    <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-slate-400 p-8 text-center">
+                        <Hash className="w-12 h-12 text-slate-600 mb-4 font-bold" />
                         <p className="text-lg">
-                            Enter keywords and click <span className="font-semibold">"Generate Ideas"</span> for your contents
+                            Enter keywords and click <span className="font-semibold text-cyan-400">"Generate Ideas"</span> for your contents
                         </p>
                     </div>
                 )
@@ -88,20 +88,20 @@ const GenerateIdea = () => {
 
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-sans">
+        <div className="min-h-screen p-4  font-sans">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
 
 
                 <div className="lg:col-span-2">
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-gray-100">
+                    <div className="bg-slate-800/50 p-6 sm:p-8 rounded-2xl shadow-xl h-fit border border-slate-700 backdrop-blur-sm">
 
-                        <h1 className="flex items-center text-2xl font-bold text-gray-800 mb-2 lg:mb-8">
-                            <Sparkles className="w-6 h-6 mr-2 text-purple-500" />
+                        <h1 className="flex items-center text-2xl font-bold text-white mb-2 lg:mb-8">
+                            <Sparkles className="w-6 h-6 mr-2 text-cyan-400" />
                             Generate Content Idea
                         </h1>
 
                         <div className="mb-2 lg:mb-8">
-                            <label htmlFor="keyword" className="block text-sm font-medium text-gray-700 mb-2">
+                            <label htmlFor="keyword" className="block text-sm font-medium text-slate-300 mb-2">
                                 Keyword
                             </label>
                             <input
@@ -110,13 +110,13 @@ const GenerateIdea = () => {
                                 value={prompt}
                                 onChange={(e) => setPrompt(e.target.value)}
                                 placeholder="The future of artificial intelligence"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500 transition duration-150 shadow-sm"
+                                className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:ring-cyan-500 focus:border-cyan-500 transition duration-150 shadow-sm text-white placeholder-slate-500"
                             />
                         </div>
 
 
                         <div className="mb-2 lg:mb-8">
-                            <label className="block text-sm font-medium text-gray-700 mb-3">
+                            <label className="block text-sm font-medium text-slate-300 mb-3">
                                 Category
                             </label>
                             <div className="grid grid-cols-3 gap-2">
@@ -125,8 +125,8 @@ const GenerateIdea = () => {
                                         key={cat}
                                         onClick={() => setCategory(cat)}
                                         className={`px-3 py-2 text-sm font-medium rounded-lg transition duration-200 ease-in-out border ${category === cat
-                                                ? 'bg-blue-500 text-white border-blue-500 shadow-md'
-                                                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                                                ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-transparent shadow-md'
+                                                : 'bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700'
                                             }`}
                                     >
                                         {cat}
@@ -137,10 +137,10 @@ const GenerateIdea = () => {
 
 
                         <button
-                            onClick={handleGenerate}
+                            onClick={handleGenerating}
                             disabled={loading}
                             className={`w-full flex items-center justify-center px-4 py-3 text-white font-semibold rounded-xl transition duration-300 transform active:scale-98 
-                                bg-linear-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 shadow-lg shadow-cyan-500/50
+                                bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 shadow-lg shadow-purple-500/25
                             `}
                         >
                             {loading ? <Loader className="w-5 h-5 mr-2"/>  : <Hash className="w-5 h-5 mr-2" />}
@@ -151,9 +151,9 @@ const GenerateIdea = () => {
 
 
                 <div className="lg:col-span-3">
-                    <div className="bg-white p-6 sm:p-10 rounded-2xl shadow-xl min-h-[50vh] lg:min-h-[70vh] border border-gray-100">
-                        <h2 className="flex items-center text-xl font-bold text-gray-800 border-b pb-4 mb-6">
-                            <Hash className="w-5 h-5 mr-2 text-purple-500" />
+                    <div className="bg-slate-800/50 p-6 sm:p-10 rounded-2xl shadow-xl min-h-[50vh] lg:min-h-[70vh] border border-slate-700 backdrop-blur-sm">
+                        <h2 className="flex items-center text-xl font-bold text-white border-b border-slate-700 pb-4 mb-6">
+                            <Hash className="w-5 h-5 mr-2 text-cyan-400" />
                             Generated Ideas
                         </h2>
                         <TitleDisplay />

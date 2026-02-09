@@ -162,7 +162,7 @@ export const generateIdea = async (req, res) => {
         { role: "user", content: prompt },
       ],
       temperature: 0.7,
-      max_completion_tokens: 1600,
+      max_completion_tokens: 2500,
     });
 
     const content = response.choices[0].message.content;

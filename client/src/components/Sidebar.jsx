@@ -28,33 +28,22 @@ export const Sidebar = ({ closeSidebar }) => {
   ];
 
   return (
-    <div className="relative w-[250px] min-h-[90vh] bg-white border-r border-gray-200 p-6 flex flex-col">
+    <div className="relative w-[280px] min-h-[80vh] bg-slate-900 border-r border-slate-700 p-6 flex flex-col text-white">
 
       {/* Close Button for Mobile */}
       {closeSidebar && user && (
         <button
           onClick={closeSidebar}
-          className="absolute top-3  right-4 bg-gray-200 px-2 py-2 rounded-full lg:hidden"
+          className="absolute top-3 right-4 bg-slate-700 hover:bg-slate-600 px-2 py-2 rounded-full lg:hidden transition"
         >
-          <X size={17} />
+          <X size={20} />
         </button>
       )}
 
-      {/* User Section */}
-      {/* <div className="flex items-center gap-4 mb-10 cursor-pointer mt-6 lg:mt-0">
-        <img
-          src={user?.imageUrl}
-          alt="User avatar"
-          className="w-14 h-14 rounded-full border"
-        />
-        <div>
-          <p className="text-lg font-semibold">Dashboard</p>
-          <p className="text-sm text-gray-500">{user?.fullName}</p>
-        </div>
-      </div> */}
+    
 
       {/* Menu Section */}
-      <div className="flex flex-col gap-3 mt-12 lg:mt-0">
+      <div className="flex flex-col gap-2 mt-2 lg:mt-0">
         {menu.map((item, index) => {
           const isActive = location.pathname === item.to;
 
@@ -68,8 +57,8 @@ export const Sidebar = ({ closeSidebar }) => {
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition font-medium
                 ${
                   isActive
-                    ? "bg-indigo-100 text-indigo-700"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white shadow-lg shadow-purple-500/25"
+                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
                 }`}
             >
               {item.icon}
@@ -80,7 +69,7 @@ export const Sidebar = ({ closeSidebar }) => {
       </div>
 
       {/* Footer */}
-      <div className="mt-auto pt-3 text-center text-sm text-gray-500">
+      <div className="mt-auto pt-4 text-center text-sm text-slate-500">
         <p>All rights reserved.</p>
         <p className="tracking-tight">
           AI can make mistakes. Validate before sensitive use.

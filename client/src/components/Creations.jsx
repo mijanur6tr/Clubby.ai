@@ -17,12 +17,12 @@ const Creations = ({ creations, setCreations }) => {
   };
 
   return (
-    <div className="w-full py-8 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-bold mb-8 text-gray-900">Your Creations</h2>
+    <div className="w-full  min-h-screen">
+      <h2 className="text-3xl font-bold mb-8 text-white">Your Creations</h2>
 
       <div className="flex flex-col gap-6">
         {creations.length === 0 ? (
-          <p className="text-gray-500 text-center">No creations found.</p>
+          <p className="text-slate-400 text-center">No creations found.</p>
         ) : (
           creations.map((item) => {
             const isOpen = openId === item.id;
@@ -30,19 +30,19 @@ const Creations = ({ creations, setCreations }) => {
             return (
               <div
                 key={item.id}
-                className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-100"
+                className="bg-slate-800/50 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-slate-700 backdrop-blur-sm"
               >
                 <div
                   className="flex justify-between items-center cursor-pointer"
                   onClick={() => toggleOpen(item.id)}
                 >
                   <div>
-                    <p className="font-semibold text-gray-800 text-lg">
+                    <p className="font-semibold text-white text-lg">
                       {item.prompt.length > 70
                         ? item.prompt.slice(0, 70) + "..."
                         : item.prompt}
                     </p>
-                    <p className="text-gray-500 text-sm mt-1">
+                    <p className="text-slate-400 text-sm mt-1">
                       {item.type.replace("-", " ")} —{" "}
                       {dayjs(item.created_at).format("D/MM/YYYY")}
                     </p>
@@ -50,15 +50,15 @@ const Creations = ({ creations, setCreations }) => {
                   
                   <div className="flex">
 
-                  <span className="px-2 lg:px-4 py-1 rounded-lg text-center  text-sm border border-blue-300 text-blue-600 bg-blue-50 capitalize">
+                  <span className="px-2 lg:px-4 py-1 rounded-lg text-center  text-sm border border-cyan-500/50 text-cyan-400 bg-cyan-500/10 capitalize">
                     {item.type.replace("-", " ")}
                   </span>
 
                   <div className="ml-4">
                     {isOpen ? (
-                      <ChevronUp size={22} className="text-gray-500" />
+                      <ChevronUp size={22} className="text-slate-400" />
                     ) : (
-                      <ChevronDown size={22} className="text-gray-500" />
+                      <ChevronDown size={22} className="text-slate-400" />
                     )}
                   </div>
 
@@ -67,14 +67,14 @@ const Creations = ({ creations, setCreations }) => {
                 </div>
 
                 {isOpen && (
-                  <div className="mt-5 border-t pt-4 space-y-4">
+                  <div className="mt-5 border-t border-slate-700 pt-4 space-y-4">
                     <div>
-                      <h3 className="text-gray-700 font-semibold mb-2">Full Prompt</h3>
-                      <p className="text-gray-600">{item.prompt}</p>
+                      <h3 className="text-slate-300 font-semibold mb-2">Full Prompt</h3>
+                      <p className="text-slate-400">{item.prompt}</p>
                     </div>
 
                     <div>
-                      <h3 className="text-gray-700 font-semibold mb-2">
+                      <h3 className="text-slate-300 font-semibold mb-2">
                         Generated Content
                       </h3>
 
@@ -82,23 +82,23 @@ const Creations = ({ creations, setCreations }) => {
                         <img
                           src={item.content}
                           alt="Generated"
-                          className="w-full max-h-[400px] object-contain rounded-lg shadow-md border border-gray-200"
+                          className="w-full max-h-[400px] object-contain rounded-lg shadow-md border border-slate-600"
                         />
                       ) : (
-                        <pre className="whitespace-pre-wrap text-gray-700 bg-gray-50 p-4 rounded-lg border text-sm">
+                        <pre className="whitespace-pre-wrap text-slate-300 bg-slate-900 p-4 rounded-lg border border-slate-700 text-sm">
                           <Markdown>{item.content}</Markdown>
                         </pre>
                       )}
                     </div>
 
                     <div className="flex justify-between items-center">
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-slate-500">
                         Last Updated — {dayjs(item.updated_at).format("D/MM/YYYY")}
                       </p>
 
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                        className="px-3 py-1 bg-red-500/20 text-red-400 border border-red-500/50 rounded-lg hover:bg-red-500/30 transition"
                       >
                         Delete
                       </button>

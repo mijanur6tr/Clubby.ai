@@ -61,16 +61,16 @@ const Community = () => {
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-sans">
+    <div className="min-h-screen p-4 sm:p-8 font-sans">
 
-      <h2 className="text-3xl font-extrabold text-gray-900 mb-8 sm:mb-12 border-b pb-4">
+      <h2 className="text-3xl font-extrabold text-white mb-8 sm:mb-12 border-b border-slate-700 pb-4">
         Clubby Community Creations ✨
       </h2>
 
- 
+   
       {loading && (
        <div className="w-full flex justify-center items-center py-20">
-    <Loader2 className="w-12 h-12 animate-spin text-gray-500" />
+    <Loader2 className="w-12 h-12 animate-spin text-cyan-400" />
   </div>
       )}
 
@@ -79,7 +79,7 @@ const Community = () => {
           {creations.map((creation) => (
             <div
               key={creation.id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+              className="bg-slate-800/50 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden group border border-slate-700 backdrop-blur-sm"
             >
               <div className="relative aspect-square w-full">
                 <img
@@ -87,19 +87,19 @@ const Community = () => {
                   alt={`Creation by ${creation.userName}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                   <p className="text-sm font-semibold text-white truncate">{creation.prompt}</p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between p-3">
+              <div className="flex items-center justify-between p-3 bg-slate-800/80">
                 <div className="flex items-center space-x-1">
-                  <span className="text-base font-semibold text-gray-700">
+                  <span className="text-base font-semibold text-slate-300">
                     {creation.likes.length}
                   </span>
                   <button
                     onClick={() => handleLike(creation.id)}
-                    className="p-1 rounded-full hover:bg-red-50 transition duration-150"
+                    className="p-1 rounded-full hover:bg-slate-700 transition duration-150"
                     disabled={!user || likeLoading}
                   >
                     <Heart
@@ -108,7 +108,7 @@ const Community = () => {
                         transition-colors duration-200
                         ${creation.likes.includes(user.id)
                           ? 'fill-red-500 text-red-500'
-                          : 'text-gray-400 hover:text-red-400'
+                          : 'text-slate-400 hover:text-red-400'
                         }
                       `}
                     />
