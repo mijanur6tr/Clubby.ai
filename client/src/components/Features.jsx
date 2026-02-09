@@ -188,28 +188,7 @@ const Features = () => {
           ))}
         </motion.div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-20"
-        >
-          <p className="text-gray-400 mb-6 text-lg font-['Inter']">
-            Can't find what you're looking for?
-          </p>
-          <Link to="/contact">
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(168, 85, 247, 0.3)" }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-2xl font-['Poppins']"
-            >
-              Request a Feature
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </Link>
-        </motion.div>
+       
       </div>
     </section>
   );
