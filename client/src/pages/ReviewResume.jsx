@@ -83,7 +83,7 @@ const ReviewResume = () => {
     // };
 
     return (
-        <div className="min-h-[50vh] bg-slate-900 text-gray-50 p-4 sm:p-8 font-sans flex justify-center items-center ">
+        <div className="min-h-[50vh] text-gray-50 p-4 sm:p-8 font-sans flex justify-center items-center ">
             <p className='max-w-2xl text-2xl'>Soon this feature will be unlocked. Try Generate content ideas, Generate Content,  Make images, Remove backgrounds,
           Belete objects form image.</p>
           
